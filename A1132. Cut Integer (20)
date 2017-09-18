@@ -1,0 +1,35 @@
+#include <iostream>
+#include <stdio.h>
+#include <math.h>
+#include <string>
+using namespace std;
+
+int main(){
+    int n;
+    char num[11];
+    scanf("%d", &n);
+    for(int i=0;i<n;i++){
+        long long z, z1=0, z2=0,Z;
+        scanf("%lld", &z);
+        Z=z;
+        int len=0;
+        while(z){
+            num[len++]=z%10;
+            z=z/10;
+        }
+        for(int j= len-1; j>=len/2;j--){
+            z1 = z1*10+num[j];
+        }
+        for(int k= len/2 -1; k>=0;k--){
+            z2 = z2*10+num[k];
+        }
+        if(z1==0||z2==0) {printf("No");}
+        else{
+            if(Z*(1.0)/(z1*z2)==(Z/(z1*z2))) printf("Yes");
+            else printf("No");
+        }
+        if(i!=n-1) printf("\n");
+        
+    }
+    return 0;
+}
