@@ -1,2 +1,0 @@
-# PAT
-Programming Ability Test.
