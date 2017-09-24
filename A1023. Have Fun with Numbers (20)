@@ -1,0 +1,71 @@
+A1023. Have Fun with Numbers (20)
+
+
+
+Notice that the number 123456789 is a 9-digit number consisting exactly the numbers from 1 to 9, with no duplication. Double it we will obtain 246913578, which happens to be another 9-digit number consisting exactly the numbers from 1 to 9, only in a different permutation. Check to see the result if we double it again!
+
+Now you are suppose to check if there are more numbers with this property. That is, double a given number with k digits, you are to tell if the resulting number consists of only a permutation of the digits in the original number.
+
+Input Specification:
+
+Each input file contains one test case. Each case contains one positive integer with no more than 20 digits.
+
+Output Specification:
+
+For each test case, first print in a line "Yes" if doubling the input number gives a number that consists of only a permutation of the digits in the original number, or "No" if not. Then in the next line, print the doubled number.
+
+Sample Input:
+1234567899
+Sample Output:
+Yes
+2469135798
+
+
+
+#include <iostream>
+#include <string.h>
+#include <algorithm>
+
+using namespace std;
+
+char a[20];
+int b[25],c[20];
+
+int main(){
+    gets(a);
+    int lenA=strlen(a);
+    for(int i=0;i<lenA;i++){
+        c[i]=a[i]-'0';
+    }
+    //乘法
+    int carry=0,lenB=0;
+    for(int i=0;i<lenA;i++){
+        int d=2*c[lenA-1-i]+carry;
+        b[lenB++]=d%10;   //各位的结果
+        carry=d/10;  //高位为新的进位
+    }
+    while(carry!=0){//乘法的进位可能不止一位
+        b[lenB++]=carry%10;
+        carry /=10;
+    }
+    int d[25];
+    for(int i=0;i<lenB;i++){
+        d[i]=b[lenB-1-i];
+    }
+    sort(b,b+lenB);
+    sort(c,c+lenA);
+    bool flag=true;
+    if(lenA != lenB) flag=false;
+    for(int i=0;i<lenB;i++){
+        if(c[i]!=b[i]){
+            flag=false;
+            break;
+        }
+    }
+    if(flag) printf("Yes\n");
+    else printf("No\n");
+    for(int i=0;i<lenB;i++){
+        printf("%d",d[i]);
+    }
+    return 0;
+}
